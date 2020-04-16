@@ -13,5 +13,5 @@ install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 
 script:
-  -g++ sources/main.cpp -std=c++17
+  - g++ sources/main.cpp -std=c++17
   - ./a.out < examples/test.txt
