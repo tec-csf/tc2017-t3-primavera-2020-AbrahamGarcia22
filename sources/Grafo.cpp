@@ -182,7 +182,7 @@ class Grafo{
     }
             list<Vertice*>visitado;
         list<Vertice*>::iterator i;
-    void profundidad(Vertice *actual){git 
+    void profundidad(Vertice *actual){
         int flag=0;
         Arista *aux;
         aux=actual->adyacente;
