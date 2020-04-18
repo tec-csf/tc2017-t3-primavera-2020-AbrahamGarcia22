@@ -15,3 +15,5 @@ install:
 script:
   - g++ sources/main.cpp -std=c++17
   - ./a.out < examples/test.txt
+  - g++ sources/Grafe.cpp -std=c++17
+  - ./a.out
