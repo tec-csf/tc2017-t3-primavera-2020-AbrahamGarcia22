@@ -1,4 +1,4 @@
-# Tarea *[TAREA 3]*. *[Técnicas de diseño de algoritmos*
+# Tarea *[3]*. *[Técnicas de diseño de algoritmos*
 
 ---
 
@@ -37,11 +37,25 @@ El proyecto debe seguir la siguiente estructura de carpetas:
 
 ## 2. Solución
 
-*[Incluya aquí una explicación de la solución implementada]*
+*Multiplicacion de matrices*
+
+Para resolver este problema se utilizó el método ávido.
+Debido a que la cantidad de operaciones aumentan de manera cuadrática dependiendo de las dimensiones, hacerlo de forma recursiva es muy tardado. Por lo tanto lo mejor es guardar en una tabla las soluciones para después utilizarlas.
+La matriz tendrá guardado el resultado más optimo para su posición en especifica
+Como tal la matriz representa el numero de particiones desde desde i hasta j.Asi, la matriz se llena por diagonales, siendo la diagonal central 0 y la parte derecha contendrá las particiones y sus resultados. Cada casilla depende de las particiones en las que se puede dividir.Debido a esto, la solucion general va a estar en la esquina superior derecha de la matriz, donde tenemos todas las posibles particiones y cual de estas es la suma minima de multiplicaciones escalares.
+
+*Ciclos hamiltonianos*
+
+Este problema se resolvio de la forma vuelta atrás.
+La solucion se obtiene recorriendo de manera profunda el grafo dado, explorando todas las posibles soluciones que se tienen.
+El ciclo se cumple si siempre y cuando este sea convexo. El ciclo se cumple si se visita cada uno de los nodos solamente una vez. Por lo tantio si nos ayudamos de una estructura como un arreglo para ir guardando los vertices que ya visitamos, podemos recorrer las opciones válidas. Esta lista será la solucion final, cuando termine el algoritmo. Si en un dado caso, un camino no funcionó, se regresa a al vértice anterior para explorar otro vertice y se elimina el vertice fallido de la estructura.
+Si todos los vertices de la estructura fueron validos y el ultimo se conecta con el primero, ese camino será la solución. El coste si el grafo es ponderado, se evalua cuando los vertices son válidos,si se insertan, tambien se añade su coste, en el caso de que se tenga que eliminar, también se resta dicho coste.
+
 
 ### 2.1 Pasos a seguir para utilizar la aplicación
 
-*[Incluya aquí una guía paso a paso para poder utilizar la aplicación, desde la clonación del repositorio, la compilación del código hasta la ejecución de los ejemplos para visualizar los resultados.]*
+clonar el repositorio en la terminal
+git clone 
 
 ## 3. Referencias
 
