@@ -61,39 +61,58 @@ class Grafo{
         nueva->siguiente=NULL;
         nueva->peso=peso;
         Arista *aux;
+        Vertice *auxi;
         aux=origen->adyacente;
         if(aux==NULL){
             origen->adyacente=nueva;
             nueva->adyacente=destino;
+            cout<<"caso"<<endl;
         }
         else{
             while(aux->siguiente!=NULL){
                 aux=aux->siguiente;
+                
                 //nueva->adyacente=destino;
             }
             aux->siguiente=nueva;
             nueva->adyacente=destino;
+            /*if(nueva->peso<aux->peso){
+                origen->adyacente=nueva;
+                nueva->siguiente=aux;
+                
+
+            }
+
+
+
+
+
+
+
+
+            aux->siguiente=nueva;
+            nueva->adyacente=destino;
+
+
+
             cout<<nueva->peso<<" nueva"<<endl;
+            cout<<aux->adyacente->nombreNodo<<" auxNO"<<endl;
             cout<<aux->peso<<" aux"<<endl;
             if(nueva->peso<aux->peso){
-                cout<<"flag"<<endl;
-                
-            }
-        }
-        /*aux=destino->adyacente;
 
-        if(aux==NULL){
-            destino->adyacente=nueva2;
-            nueva2->adyacente=origen;
+                cout<<"flag"<<endl;
+                Arista *a;
+                a=aux;
+                cout<<a->adyacente->nombreNodo<<" auxA"<<endl;
+                aux->peso=nueva->peso;
+                aux->adyacente=nueva->adyacente;
+                nueva->peso=a->peso;
+                nueva->adyacente=a->adyacente;
+                cout<<nueva->adyacente->nombreNodo<<" ADY"<<endl;
+                //cout<<aux->siguiente->adyacente->nombreNodo<<"pruba2"<<endl;
+                
+            }*/
         }
-        else{
-            while(aux->siguiente!=NULL){
-                aux=aux->siguiente;
-                //nueva->adyacente=destino;
-            }
-            aux->siguiente=nueva2;
-            nueva->adyacente=origen;*
-        }*/
 
     }
     void insertarVertice(string nombre){
@@ -135,74 +154,6 @@ class Grafo{
 
 
     }
-    void hamiltoniano(){
-    Vertice *vAux;
-    Arista *aAux;
-    vAux=v0;
-    int nodos=7;
-    hamiltonianoAux(getVertice("A"));
-    
-        
-    }
-    void hamiltonianoAux(Vertice* actual){
-        Vertice *verticeaux;
-        Arista *aristaaux;
-       verticeaux=actual;
-        while(verticeaux!=NULL){
-            aristaaux=verticeaux->adyacente;
-            while(aristaaux!=NULL){
-                verticeaux=aristaaux->adyacente;
-                if(verticeaux!=NULL){
-                    cout<<"flag"<<endl;
-                    hamiltonianoAux(verticeaux);
-                }
-                else{
-                    return;
-                }
-                aristaaux=aristaaux->siguiente;
-            } 
-        }
-         
-    }
-    /*void profundiad(Vertice *actual){
-        stack<Vertice*> pila;
-        list<Vertice*>lista;
-        int flag=0;
-        int flag2=0;
-        list<Vertice*>::iterator i;
-        pila.push(actual);
-        while(!pila.empty()){
-            actual=pila.top();
-            pila.pop();
-            for(i=lista.begin();i!=lista.end();i++){
-                if (*i ==actual){
-                    flag=1;
-                }
-            }
-            if(flag==0){
-                cout<<actual->nombreNodo<<", ";
-                lista.push_back(actual);
-                Arista *aux;
-                aux=actual->adyacente;
-                while(aux!=NULL){
-                    for(i=lista.begin();i!=lista.end();i++){
-                        if (*i ==aux->adyacente){
-                        flag2=1;
-                        }   
-                    }
-                    if(flag2==0){
-                        pila.push(aux->adyacente);
-                    }
-                    aux=aux->siguiente;
-                }
-
-            }
-        }
-
-
-
-
-    }*/
         list<Vertice*>visitado;
         
         list<Vertice*>::iterator i;
@@ -213,11 +164,17 @@ class Grafo{
         Arista *aux;
         aux=actual->adyacente;
 
+
         while(aux!=NULL){
+                    if(actual==v0){
+            cout<<"flag"<<endl;
+            visitado.clear();
+            visitado.push_back(v0);
+        }
             for(i=visitado.begin();i!=visitado.end();i++){
                 if(*i ==aux->adyacente){
                     flag=1;
-                    if(aux->adyacente==v0&&contador==7){
+                    if(aux->adyacente==v0&&visitado.size()==7){
                         //break;    g.insertarArista(g.getVertice("A"),g.getVertice("B"),500);
 
                         cout<<"hay ciclo: "<<actual->nombreNodo<<endl;
@@ -254,8 +211,9 @@ int main(){
     g.insertarVertice("4");
     g.insertarVertice("5");*/
     g.insertarArista(g.getVertice("A"),g.getVertice("B"),500);
-    g.insertarArista(g.getVertice("A"),g.getVertice("C"),50);    
-    /*g.insertarArista(g.getVertice("B"),g.getVertice("C"),50);
+    g.insertarArista(g.getVertice("A"),g.getVertice("C"),50); 
+    g.insertarArista(g.getVertice("A"),g.getVertice("D"),10);   
+    g.insertarArista(g.getVertice("B"),g.getVertice("C"),50);
     g.insertarArista(g.getVertice("C"),g.getVertice("D"),50);
     g.insertarArista(g.getVertice("D"),g.getVertice("E"),5);
     g.insertarArista(g.getVertice("E"),g.getVertice("F"),10);
@@ -263,8 +221,14 @@ int main(){
     g.insertarArista(g.getVertice("G"),g.getVertice("A"),40);
     g.insertarArista(g.getVertice("B"),g.getVertice("E"),50);
     g.insertarArista(g.getVertice("E"),g.getVertice("C"),50);
-    g.insertarArista(g.getVertice("C"),g.getVertice("D"),50);
     g.insertarArista(g.getVertice("D"),g.getVertice("F"),50);
+    g.insertarArista(g.getVertice("F"),g.getVertice("C"),50);
+    g.insertarArista(g.getVertice("D"),g.getVertice("G"),50);
+    g.insertarArista(g.getVertice("D"),g.getVertice("G"),50);
+    g.insertarArista(g.getVertice("D"),g.getVertice("G"),50);
+
+
+    
    /*g.insertarArista(g.getVertice("1"),g.getVertice("2"),50);
     g.insertarArista(g.getVertice("1"),g.getVertice("3"),50);
     g.insertarArista(g.getVertice("2"),g.getVertice("4"),50);
@@ -272,6 +236,6 @@ int main(){
     //g.insertarArista(g.getVertice("4"),g.getVertice("5"),50);*/
     //cout<<g.getVertice("A")->adyacente->adyacente->adyacente->adyacente->nombreNodo<<endl;
     g.lista();
-    //g.profundidad(g.v0);
+    g.profundidad(g.v0);
 }
 
